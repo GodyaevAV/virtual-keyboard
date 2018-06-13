@@ -1,0 +1,112 @@
+.keyboard {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  max-height: 45%;
+  background-color: #ffffdf;
+}
+
+.symbols > div {
+  box-sizing: border-box;
+  padding-top: 21px;
+  font-size: 18px;
+} 
+
+.key{
+  display: inline-block;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px  #3C93D5;
+  width: calc(100% / 14 + 2px);
+  height: 60px;
+  margin-right: 2px;
+  margin-top: 4px;
+  font-size: 18px;
+  padding-top: 21px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+} 
+
+.caps {
+  width: 90px;
+  height: 60px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px  red;
+  background-color: #ffffff;
+  display: inline-block;
+} 
+
+.shift {
+  width: 130px;
+  height: 60px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px  red;
+  background-color: #ffffff;
+  display: inline-block;
+} 
+
+.btnActive {
+  background-color: red;
+} 
+
+.space {
+  width: 350px;
+  height: 60px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px  red;
+  display: inline-block;
+  background-color: #ffffff;
+} 
+
+.symbols {
+  width: 60%;
+  display: inline-block;
+} 
+
+.otherSymbols {
+  vertical-align: top;
+  width: 40%;
+  display: inline-block;
+} 
+
+.otherSymbols > .key {
+  width: calc(150% / 10)
+} 
+
+.symbols > div {
+  cursor: pointer;
+} 
+.close {
+  cursor: pointer;
+  position: fixed;
+  right: 1%;
+  bottom: 40%;
+  line-height: 23px;
+  vertical-align: middle;
+  font-size: 38px;
+  border-radius: 50%;
+  border: 1px solid;
+  transform: rotate(45deg);
+}
+.open{
+  cursor: pointer;
+  width: 300px;
+  font-size: 24px;
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 150px);
+  border: 1px solid #3C93D5;
+  vertical-align: middle;
+}
+.modalView{
+  position: absolute;
+  bottom: 70px;
+}
+@media (max-width: 900px) {
+  .lang{
+    width: 50px;
+  }
+}
+@media (min-width: 1367px) {
+  .keyboard{
+    bottom: 0;
+    height: auto
+  }
+}
