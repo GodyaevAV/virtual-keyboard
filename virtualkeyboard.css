@@ -2,22 +2,57 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 70%;
   text-align: center;
   max-height: 45%;
-  background-color: #ffffdf;
+  background-color: gray;
+  height: 45%;
+  display: flex;
+  flex-direction: row;
 }
 
 .symbols > div {
   box-sizing: border-box;
   padding-top: 21px;
   font-size: 18px;
+  margin-left: 2px;
+  margin-right: 2px;
 } 
-
-.key{
+.key {
+  position: relative;
+  display: inline-block;
+ /*  width: 2em;
+  height: 2em;
+  line-height: 2em; */
+  vertical-align: middle;
+  background: #dcdcdc;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  outline: none;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px #ddd inset, 0 1px 1px #fff;
+  
+  width: calc(100% / 14);
+  height: 60px;
+  margin-right: 2px;
+  margin-top: 4px;
+  font-size: 18px;
+  padding-top: 21px;
+  box-sizing: border-box;
+}
+.key:hover {
+  background: #dcdcdc linear-gradient(#fff, #dcdcdc);
+  box-shadow: 0 0 0 1px #aaa inset, 0 1px 1px #aaa;
+}
+.key:active {
+  background: none;
+    box-shadow: 0 0 0 1px #bbb inset, 0 1px 3px rgba(0,0,0,.5) inset, 0 1px 2px #fff;
+}
+/* .key{
   display: inline-block;
   box-shadow: 0.5px 0.5px 0.5px 0.5px  #3C93D5;
-  width: calc(100% / 14 + 2px);
+  width: calc(100% / 14);
   height: 60px;
   margin-right: 2px;
   margin-top: 4px;
@@ -25,45 +60,64 @@
   padding-top: 21px;
   background-color: #ffffff;
   box-sizing: border-box;
-} 
+}  */
 
 .caps {
   width: 90px;
   height: 60px;
   box-shadow: 0.5px 0.5px 0.5px 0.5px  red;
   background-color: #ffffff;
-  display: inline-block;
+  margin-right: 2px;
+  margin-top: 4px;
+  font-size: 18px;
+  padding-top: 21px;
+  box-sizing: border-box;
 } 
 
 .shift {
-  width: 130px;
+  width: 100px;
   height: 60px;
   box-shadow: 0.5px 0.5px 0.5px 0.5px  red;
   background-color: #ffffff;
-  display: inline-block;
+  margin-right: 2px;
+  margin-top: 4px;
+  font-size: 18px;
+  padding-top: 21px;
+  box-sizing: border-box;
 } 
 
 .btnActive {
-  background-color: red;
+  background-color: #bbf;
 } 
 
 .space {
-  width: 350px;
+  width: 29%;
   height: 60px;
   box-shadow: 0.5px 0.5px 0.5px 0.5px  red;
-  display: inline-block;
   background-color: #ffffff;
+  margin-right: 2px;
+  margin-top: 4px;
+  font-size: 18px;
+  padding-top: 21px;
+  box-sizing: border-box;
 } 
 
 .symbols {
-  width: 60%;
-  display: inline-block;
+  width: 65%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;  
 } 
 
 .otherSymbols {
-  vertical-align: top;
-  width: 40%;
-  display: inline-block;
+  width: 35%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 } 
 
 .otherSymbols > .key {
@@ -73,17 +127,8 @@
 .symbols > div {
   cursor: pointer;
 } 
-.close {
-  cursor: pointer;
-  position: fixed;
-  right: 1%;
-  bottom: 40%;
-  line-height: 23px;
-  vertical-align: middle;
-  font-size: 38px;
-  border-radius: 50%;
-  border: 1px solid;
-  transform: rotate(45deg);
+.lang {
+  width: 40px;
 }
 .open{
   cursor: pointer;
@@ -98,6 +143,8 @@
 .modalView{
   position: absolute;
   bottom: 70px;
+  text-align: center;
+  width: 100%;
 }
 @media (max-width: 900px) {
   .lang{
@@ -108,5 +155,69 @@
   .keyboard{
     bottom: 0;
     height: auto
+  }
+}
+@media (min-width: 1125px) {
+  .key {
+    width: calc(100% / 12);
+  }
+  .shift{
+    width: calc(100% / 7);
+  }
+  .caps{
+    width: calc(100% / 7);
+  }
+  .lang{
+    width: 50px;
+  }
+  .space{
+    width: 150px;
+  }
+}
+@media (max-width: 411px) {
+  .keyboard{
+    width: 100%;
+  }
+  .space {
+    width: 50px
+  }
+  .key {
+    height: 30px;
+    font-size: 12px;
+    padding-top: 10px;
+  }
+  .shift {
+    height: 30px;
+    width: 70px;
+  }
+  .caps {
+    height: 30px;
+  }
+  .space {
+    height: 30px;
+    width: 90px;
+  }
+  .lang {
+    width: 25px;
+    vertical-align: middle;
+    padding-top: 7px;
+  }
+  .symbols {
+    width: 100%;
+  }
+  .symbols > div {
+    box-sizing: border-box;
+    padding-top: 10px;
+    font-size: 12px;
+  } 
+  .keyboard {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .otherSymbols {
+    width: 100%
+  }
+  .otherSymbols > .key {
+    width: calc(100% / 12)
   }
 }

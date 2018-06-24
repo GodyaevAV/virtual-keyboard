@@ -1,31 +1,27 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  const VirtualKeyboard = new Vue({
+	document.head.innerHTML +=''
+	document.body.innerHTML += '<div class="virtualkeyboard" />'
+	document.head.innerHTML +=	'<link rel="stylesheet" href="https://rawgit.com/GodyaevAV/virtual-keyboard/master/virtualkeyboard.css">'
+	const VirtualKeyboard = new Vue({
     el: '.virtualkeyboard',
 		template: `
-			<div class="keyboard">
-				<template v-if="!isOpen">
-					<div class="modalView"><strong>ВНИМАНИЕ!</strong><br>Ввод пароля с использованием обычной клавиатуры может быть небезопасным. Пожалуйста, используйте встроенную в сайт клавиатуру, для безопасности ваших данных.</div>
-					<div class="open" @click="isOpen = true">Открыть клавиатуру</div>
-				</template>
-				<template v-else>
-					<div class="close" @click="isOpen = false">+</div>
-					<div class="symbols">
-						<template v-for="(item, index) in symbols">
-							<div class="shift" v-if="index === 8" :key="item+index" @click="backspace">Backspace</div>
-							<div class="caps" v-if="index === 8" :key="'caps'+index" @click="capsControl = !capsControl"
-							:class="{btnActive: capsControl && !shift}">CapsLock</div>
-							<div class="shift" v-if="index === 19" :key="item+index" @click="shiftPress"
-							:class="{btnActive: shift}">Shift</div>
-							<div class="key"  :key="index" @click="put(item)">{{item}} </div>
-							<div class="space" v-if="index === symbols.length - spaceNumber" :key="item+index" @click="put()">Space</div>
-							<div class="shift lang" v-if="index === symbols.length - spaceNumber" :key="item+index+'lang'" @click="changeLanguage()"><img src="https://image.flaticon.com/icons/svg/784/784679.svg" width=16px /></div>
-						</template>
-					</div><div class="otherSymbols">
-						<template v-for="(item, index) in otherSymbols">
-							<div class="key" :key="index" @click="put(item)">{{item}}</div>
-						</template>
-					</div>
-				</template>
+			<div class="keyboard" id="virtualkeyboard">
+				<div class="symbols">
+					<template v-for="(item, index) in symbols">
+						<div class="key shift" v-if="index === 8" :key="item+index" @click="backspace">Backspace</div>
+						<div class="key caps" v-if="index === 8" :key="'caps'+index" @click="capsControl = !capsControl"
+						:class="{btnActive: capsControl && !shift}">CapsLock</div>
+						<div class="key shift" v-if="index === 17" :key="item+index" @click="shiftPress"
+						:class="{btnActive: shift}">Shift</div>
+						<div class="key"  :key="index" @click="put(item)">{{item}} </div>
+						<div class="key space" v-if="index === symbols.length - spaceNumber" :key="item+index" @click="put()">Space</div>
+						<div class="key shift lang" v-if="index === symbols.length - spaceNumber" :key="item+index+'lang'" @click="changeLanguage()"><img src="https://image.flaticon.com/icons/svg/784/784679.svg" width=16px /></div>
+					</template>
+				</div><div class="otherSymbols">
+					<template v-for="(item, index) in otherSymbols">
+						<div class="key" :key="index" @click="put(item)">{{item}}</div>
+					</template>
+				</div>
 			</div>
 		`,
 
@@ -43,12 +39,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				createdElement: '',
 			  sortControl: 0,
 				outputArr: [],
-				langControl: true,
-				isOpen: true
+				langControl: true
 			}
 		},
 
 		methods: {
+
+
+
 			changeLanguage() {				
 				if(this.language) {
 					this.sortForShift(this.forShift)
@@ -77,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			  this.capsControl = this.shiftControl ?  !this.capsControl : this.capsControl
 				this.shiftControl = false
 				this.createdElement.value = this.password
+				
 			},
 
 			createArray: function (str) {
@@ -114,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			sortKeys (arr) {
 			  let newArr = []
 			  while (arr.length) {
-				let rand = 0 + Math.floor(Math.random() * (arr.length))
+				let rand = 0 + Math.floor(Math.random(new Date().toISOString()) * (arr.length))
 				newArr.push(arr[rand])
 				arr.splice(rand, 1)
 			  }
@@ -127,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					let arr = elem
 					let newArr = [[], []]
 					while (arr[0].length) {
-						let rand = 0 + Math.floor(Math.random() * (arr[0].length))
+						let rand = 0 + Math.floor(Math.random(new Date().toISOString()) * (arr[0].length))
 						for (let i = 0; i <= 1; i++) {
 							newArr[i].push(arr[i][rand])
 							arr[i] = arr[i].substr(0, rand) + arr[i].substr(rand + 1, arr[i].length)
@@ -135,11 +134,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					}
 					this.outputArr = newArr
 				}
-			}
-		},
-		watch: {
-			isOpen: function (val) {
-				this.createdElement.disabled = val
 			}
 		},
 		computed: {
@@ -161,4 +155,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			this.createdElement.disabled = true
 		}
 	});
+	var vkb = document.getElementById('virtualkeyboard');
+
+	vkb.onmousedown = function(e) {
+		if (e.path[1].id) {
+		
+			var coords = getCoords(vkb);
+			var shiftX = e.pageX - coords.left;
+			var shiftY = e.pageY - coords.top;
+		
+			vkb.style.position = 'absolute';
+			document.body.appendChild(vkb);
+			moveAt(e);
+		
+			vkb.style.zIndex = 1000;
+		
+			function moveAt(e) {
+				vkb.style.left = e.pageX - shiftX + 'px';
+				vkb.style.top = e.pageY - shiftY + 'px';
+			}
+		
+			document.onmousemove = function(e) {
+				moveAt(e);
+			};
+		
+			vkb.onmouseup = function() {
+				document.onmousemove = null;
+				vkb.onmouseup = null;
+			};
+		
+		}
+		
+		vkb.ondragstart = function() {
+			return false;
+		};
+		
+		function getCoords(elem) {
+			var box = elem.getBoundingClientRect();
+			return {
+				top: box.top + pageYOffset,
+				left: box.left + pageXOffset
+			};
+		}
+	}
 });
