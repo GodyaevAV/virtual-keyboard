@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 	document.head.innerHTML +=''
 	document.body.innerHTML += '<div class="virtualkeyboard" />'
-	document.head.innerHTML +=	'<link rel="stylesheet" href="https://rawgit.com/GodyaevAV/virtual-keyboard/master/virtualkeyboard.css">'
+	document.head.innerHTML +=	'<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/GodyaevAV/virtual-keyboard@master/virtualkeyboard.css">'
 	const VirtualKeyboard = new Vue({
     el: '.virtualkeyboard',
 		template: `
