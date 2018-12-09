@@ -3,6 +3,6 @@
 `<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>`
 
 Далее подключить virtualkeyboard.js.
-`<script src="https://rawgit.com/GodyaevAV/virtual-keyboard/master/virtualkeyboard.js"></script>`
+`<script src="https://cdn.jsdelivr.net/gh/GodyaevAV/virtual-keyboard@master/virtualkeyboard.js"></script>`
 
 Настроить виджет можно в файле virtualkeyboard.js
